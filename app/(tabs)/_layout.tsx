@@ -17,9 +17,13 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
+        headerShown: true,
+        headerTintColor: "#fff",
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
+headerStyle: {
+      backgroundColor: "#ff3456",
+    },
         tabBarStyle: Platform.select({
           ios: {
             position: 'absolute',

@@ -1,8 +1,29 @@
 import { Text, Image, StyleSheet, View, TextInput, Pressable } from "react-native";
 import Button from "@/components/Button";
 import { router } from "expo-router";
+import axios from 'axios';
+import { useState } from 'react'
 
 export default function Welcome() {
+const [res, setRes] = useState('un');
+const [text, onChangeText] = useState('');
+const [password, onChangePassword] = useState('');
+
+function getData() {
+
+axios.post('https://amrutha-api.onrender.com/login', {
+    email: text,
+    password: password
+  })
+  .then(function (response) {
+    setRes(response.data.message)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+  }
+
     return (
         <View style={styles.container}>
             <View style={styles.stepContainer}>
@@ -11,10 +32,21 @@ export default function Welcome() {
                 />
                 <Text style={styles.title}>Pay Free</Text>
                 <Text style={styles.subText}>Login</Text>
-                <TextInput style={styles.input} placeholder="Email" />
-                <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} />
-                <Pressable><Text style={styles.forPass}>Forgot Password</Text></Pressable>
-                <Button navigate={'/(tabs)'} placeIt="Login" />
+                <TextInput onChangeText={onChangeText} style={styles.input} placeholder="Email" />
+                <TextInput onChangeText={onChangePassword} style={styles.input} placeholder="Password" secureTextEntry={true} />
+                <Pressable onPress={() => getData()}><Text style={styles.forPass}>Forgot Password</Text></Pressable>
+<Pressable style={styles.btn} onPress={() => {
+getData();
+console.log(res);
+if (res == 'Login Success') {
+router.push('/(tabs)')
+} else {
+ alert('Invalid')
+}
+}}>
+            <Text style={styles.btnText}>Login</Text>
+        </Pressable>
+
             </View>
         </View>
     )
@@ -68,4 +100,17 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         textAlign: 'center',
     },
+    btn: {
+    backgroundColor: '#ff3456',
+    padding: 15,
+    width: '90%',
+    marginTop: 10,
+    borderRadius: 60,
+
+   },
+   btnText: {
+    color: "#fff",
+    fontSize: 20,
+    textAlign: 'center',
+   }
 })

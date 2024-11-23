@@ -1,8 +1,17 @@
 import { Text, Image, StyleSheet, View, TextInput, Pressable } from "react-native";
 import Button from "@/components/Button";
 import { router } from "expo-router";
+import axios from 'axios';
 
 export default function Welcome() {
+function ff() {
+axios.post('https://amrutha-api.onrender.com/create', {
+  email: "ab1@ab.abe",
+  password: "User@1234"
+}).then((data) => {
+  console.log(data.data.status)
+}).catch(err => { console.log(err) })
+}
     return (
         <View style={styles.container}>
             <View style={styles.stepContainer}>
@@ -16,6 +25,13 @@ export default function Welcome() {
                 <TextInput style={styles.input} placeholder="Confirm Password" secureTextEntry={true} />
                 <Button navigate={'/(tabs)'} placeIt="Create Account" />
                 <Text style={styles.haveAcc}>Already have account? <Pressable onPress={() => router.push('/login')}><Text style={{ color: "#ff4500" }}>Login</Text></Pressable></Text>
+                <Pressable onPress={() => {
+
+ff()
+
+}}>
+<Text>yudsuk</Text>
+</Pressable>
             </View>
         </View>
     )

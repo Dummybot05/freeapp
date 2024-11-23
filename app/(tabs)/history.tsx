@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function History() {
 
-  function His({ name, date, money, status, image }: any) {
+  function Trans({ name, date, money, status, image }: any) {
     return (
       <View style={styles.stepContainer}>
         <Image source={{ uri: "https://picsum.photos/100" }}
@@ -11,36 +11,30 @@ export default function History() {
         />
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.date}>{date}</Text>
-        <Text style={[styles.amount, { color: 'green' }]}>{money}</Text>
-        <Text style={styles.status}>{status}</Text>
+        {status ? <Text style={[styles.amount, { color: '#00c000' }]}>+ {money}</Text>
+                :  <Text style={[styles.amount, { color: '#ff3456' }]}>- {money}</Text> }
+        <Text style={styles.status}>{status ? 'Credited' : 'Debited'}</Text>
       </View>
     )
   }
+
   return (
-    <SafeAreaView>
+      <ScrollView>      
       <StatusBar backgroundColor={'#ff3456'} barStyle="light-content" />
-      <Text style={styles.headTitle}>History</Text>
-      <ScrollView>
-      
         <View style={styles.container}>
-          
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
-          <His name="Dummy name" date="20 May 2024 11:54" money="$ 200.89" status="Credited" />
+          <Trans name="Satish Dama" date="20 Nov 2024 09:13" money="7,975.44" status={true} />
+          <Trans name="Samantha Ruth" date="20 Nov 2024 09:13" money="453.60" status={false} />
+          <Trans name="Krithi Suresh" date="20 Nov 2024 09:13" money="3,551.00" status={true} />
+          <Trans name="Satish Dama" date="20 Nov 2024 09:13" money="7,975.44" status={true} />
+          <Trans name="Amurtha Pelzo" date="20 Nov 2024 09:13" money="1,228.22" status={false} />
+
+          <Trans name="Satish Dama" date="20 Nov 2024 09:13" money="7,975.44" status={true} />
+          <Trans name="Samantha Ruth" date="20 Nov 2024 09:13" money="453.60" status={false} />
+          <Trans name="Satish Dama" date="20 Nov 2024 09:13" money="7,975.44" status={true} />
+          <Trans name="Satish Dama" date="20 Nov 2024 09:13" money="7,975.44" status={true} />
 
         </View>
       </ScrollView>
-    </SafeAreaView>
   )
 }
 
@@ -49,17 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  headTitle: {
-    fontSize: 22,
-    padding: 10,
-    backgroundColor: "#ff3456",
-    color: "#fff",
-    width: '100%',
-    paddingLeft: 20,
-    position: 'sticky',
-    top: 0,
-    zIndex: 1
+    paddingBottom: 10,
   },
   stepContainer: {
     width: "94%",
@@ -68,22 +52,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderWidth: 1,
     borderColor: "#cdcdcd",
-    marginTop: 5,
-    marginBottom: 5,
+    marginTop: 10,
     position: 'relative',
   },
   logo: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     borderRadius: 60,
     position: 'absolute',
-    top: 10,
-    left: 10,
+    top: 15,
+    left: 15,
   },
   name: {
     fontSize: 20,
-    color: '#ff3456',
     position: 'absolute',
+    fontWeight: 'bold',
     top: 10,
     left: 80,
   },
@@ -101,6 +84,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     right: 10,
+    fontWeight: 'bold',
   },
   status: {
     fontSize: 12,
